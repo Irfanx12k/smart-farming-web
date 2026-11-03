@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>History - Smart Farming</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+
+            <div>
+                <h2>Smart Farming</h2>
+                <span>Monitoring System</span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="index.html" class="menu-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="monitoring.html" class="menu-item">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Monitoring</span>
+            </a>
+
+            
+                <a href="cnn.html" class="menu-item">
+                    <i class="fa-solid fa-camera"></i>
+                    <span>CNN</span>
+                </a>
+
+                <a href="lstm.html" class="menu-item">
+                    <i class="fa-solid fa-brain"></i>
+                    <span>LSTM</span>
+                </a>
+<a href="history.html" class="menu-item active">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>History</span>
+            </a>
+<a href="setting.html" class="menu-item">
+                <i class="fa-solid fa-gear"></i>
+                <span>Pengaturan</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <span>Sistem Aktif</span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <header class="top-header">
+
+            <div>
+
+                <h1>History</h1>
+
+                <p>
+                    Riwayat pengambilan data sensor dan status pompa
+                </p>
+
+            </div>
+
+            <div class="header-date">
+
+                <i class="fa-regular fa-calendar"></i>
+
+                <span id="currentDate">--</span>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             HISTORY DATA SENSOR
+             ===================================================== -->
+
+        <section class="history-panel">
+
+            <div class="history-header">
+
+                <div>
+                    <h2>Riwayat Data Sensor</h2>
+                    <p>
+                        Data lingkungan yang dapat digunakan sebagai dataset time-series untuk LSTM
+                    </p>
+                </div>
+
+                <div class="history-count">
+                    <span id="dataCount">0</span>
+                    Data
+                </div>
+
+            </div>
+
+            <div class="history-table-wrapper">
+
+                <table class="history-table">
+
+                    <thead>
+                        <tr>
+                            <th>Hari</th>
+                            <th>Waktu</th>
+                            <th>Suhu Udara</th>
+                            <th>Kelembapan Udara</th>
+                            <th>Kelembapan Tanah</th>
+                            <th>Status Pompa</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="historyTableBody">
+                        <!-- Data Firebase -->
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div
+                id="emptyHistory"
+                class="history-empty"
+                style="display:none;"
+            >
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <h3>Belum Ada Data</h3>
+                <p>
+                    Riwayat sensor akan muncul setelah sistem mulai menerima data.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             HISTORY CNN
+             ===================================================== -->
+
+        <section class="history-panel cnn-history-panel">
+
+            <div class="history-header">
+
+                <div>
+                    <h2>Riwayat Analisis CNN</h2>
+                    <p>
+                        Setiap foto dan hasil pengukuran CNN tersimpan sebagai satu riwayat.
+                        Klik Detail untuk melihat foto dan hasil lengkap.
+                    </p>
+                </div>
+
+                <div class="history-count cnn-count">
+                    <span id="cnnHistoryCount">0</span>
+                    Analisis
+                </div>
+
+            </div>
+
+            <div class="history-table-wrapper">
+
+                <table class="history-table cnn-history-table">
+
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Waktu</th>
+                            <th>Sumber</th>
+                            <th>Hasil CNN</th>
+                            <th>Confidence</th>
+                            <th>Status</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="cnnHistoryTableBody">
+                        <!-- Data CNN Firebase -->
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div
+                id="emptyCnnHistory"
+                class="history-empty"
+                style="display:none;"
+            >
+                <i class="fa-solid fa-brain"></i>
+                <h3>Belum Ada Analisis CNN</h3>
+                <p>
+                    Hasil foto dan analisis CNN akan muncul setelah tanaman dipotret.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             DETAIL CNN
+             ===================================================== -->
+
+        <div
+            id="cnnDetailModal"
+            class="cnn-detail-modal"
+            aria-hidden="true"
+        >
+
+            <div
+                class="cnn-detail-backdrop"
+                id="cnnDetailBackdrop"
+            ></div>
+
+            <div
+                class="cnn-detail-dialog"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="cnnDetailTitle"
+            >
+
+                <div class="cnn-detail-header">
+
+                    <div>
+                        <h2 id="cnnDetailTitle">Detail Analisis CNN</h2>
+                        <p id="cnnDetailSubtitle">--</p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="cnn-detail-close"
+                        id="cnnDetailClose"
+                        aria-label="Tutup"
+                    >
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                </div>
+
+                <div class="cnn-detail-content">
+
+                    <div class="cnn-detail-image-wrap">
+                        <img
+                            id="cnnDetailImage"
+                            src=""
+                            alt="Foto tanaman hasil analisis CNN"
+                        >
+                    </div>
+
+                    <div class="cnn-detail-results">
+
+                        <div class="cnn-detail-result-main">
+
+                            <span class="cnn-detail-label">
+                                Hasil CNN
+                            </span>
+
+                            <strong id="cnnDetailPrediction">
+                                Belum dianalisis
+                            </strong>
+
+                            <span id="cnnDetailConfidence">
+                                Confidence: --
+                            </span>
+
+                        </div>
+
+                        <div class="cnn-detail-measurements">
+
+                            <div>
+                                <span>Sumber Foto</span>
+                                <strong id="cnnDetailSource">--</strong>
+                            </div>
+
+                            <div>
+                                <span>Status Analisis</span>
+                                <strong id="cnnDetailAnalysisStatus">--</strong>
+                            </div>
+
+                            <div>
+                                <span>Lebar Daun</span>
+                                <strong id="cnnDetailLeafWidth">--</strong>
+                            </div>
+
+                            <div>
+                                <span>Luas Daun</span>
+                                <strong id="cnnDetailLeafArea">--</strong>
+                            </div>
+
+                            <div>
+                                <span>Persentase Kematangan</span>
+                                <strong id="cnnDetailMaturity">--</strong>
+                            </div>
+
+                            <div>
+                                <span>Waktu</span>
+                                <strong id="cnnDetailTime">--</strong>
+                            </div>
+
+                        </div>
+
+                        <div class="cnn-detail-sensor">
+
+                            <h3>Data Sensor</h3>
+
+                            <div class="cnn-detail-sensor-grid">
+
+                                <div>
+                                    <span>Suhu</span>
+                                    <strong id="cnnDetailTemperature">--</strong>
+                                </div>
+
+                                <div>
+                                    <span>Kelembapan Udara</span>
+                                    <strong id="cnnDetailHumidity">--</strong>
+                                </div>
+
+                                <div>
+                                    <span>Kelembapan Tanah</span>
+                                    <strong id="cnnDetailSoil">--</strong>
+                                </div>
+
+                                <div>
+                                    <span>Pompa</span>
+                                    <strong id="cnnDetailPump">--</strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="cnnDetailExtra"
+                            class="cnn-detail-extra"
+                        ></div>
+
+                        <button
+                            type="button"
+                            id="cnnAnalyzeAgainButton"
+                            class="cnn-analyze-again"
+                            style="display:none;"
+                        >
+                            <i class="fa-solid fa-brain"></i>
+                            Analisis CNN
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="history-update">
+
+            <i class="fa-regular fa-clock"></i>
+
+            Terakhir diperbarui:
+
+            <span id="lastUpdate">--</span>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="javascript/history.js"></script>
+
+</body>
+
+</html>

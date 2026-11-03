@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CNN - Smart Farming</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-container">
+<aside class="sidebar">
+<div class="sidebar-logo">
+<div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+<div><h2>Smart Farming</h2><span>Monitoring System</span></div>
+</div>
+<nav class="sidebar-menu">
+                <a href="index.html" class="menu-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="monitoring.html" class="menu-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Monitoring</span>
+                </a>
+
+                <a href="cnn.html" class="menu-item active">
+                    <i class="fa-solid fa-camera"></i>
+                    <span>CNN</span>
+                </a>
+
+                <a href="lstm.html" class="menu-item">
+                    <i class="fa-solid fa-brain"></i>
+                    <span>LSTM</span>
+                </a>
+
+                <a href="history.html" class="menu-item">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>History</span>
+                </a>
+
+                <a href="setting.html" class="menu-item">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Pengaturan</span>
+                </a>
+</nav>
+<div class="sidebar-footer"><div class="system-status"><span class="status-dot"></span><span>Sistem Aktif</span></div></div>
+</aside>
+<main class="main-content">
+<header class="top-header">
+<div><h1>CNN</h1><p>Analisis foto tanaman untuk mengetahui perkembangan dan kesiapan panen</p></div>
+<div class="header-date"><i class="fa-regular fa-calendar"></i><span id="currentDate">--</span></div>
+</header>
+
+            <!-- =================================================
+             KAMERA
+             ================================================= -->
+
+            <section class="monitor-panel camera-panel">
+
+                <div class="monitor-panel-header">
+
+                    <div>
+
+                        <h2>
+                            Kamera Tanaman
+                        </h2>
+
+                        <p>
+                            ESP32-CAM sebagai sumber gambar untuk analisis tanaman
+                        </p>
+
+                    </div>
+
+                    <span class="camera-status">
+
+                        <span class="status-dot" id="cameraStatusDot">
+                        </span>
+
+                        <span id="cameraStatus">
+                            Belum Terhubung
+                        </span>
+
+                    </span>
+
+                </div>
+
+
+                <!-- CAMERA -->
+
+                <div class="monitor-camera">
+
+                    <img id="cameraImage" alt="ESP32-CAM">
+
+                    <div id="cameraPlaceholder" class="camera-placeholder">
+
+                        <i class="fa-solid fa-camera"></i>
+
+                        <h3>
+                            Kamera Belum Terhubung
+                        </h3>
+
+                        <p>
+                            Masukkan IP ESP32-CAM untuk menampilkan kamera.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CAMERA CONTROL -->
+
+                <div class="camera-control">
+
+                    <div class="camera-ip">
+
+                        <label>
+                            IP ESP32-CAM
+                        </label>
+
+                        <input type="text" id="cameraIpInput" placeholder="Contoh: 192.168.1.50">
+
+                    </div>
+
+                    <button class="camera-button" id="connectCameraButton">
+
+                        <i class="fa-solid fa-link"></i>
+
+                        Hubungkan Kamera
+
+                    </button>
+
+
+                    <button class="capture-button" id="captureButton">
+
+                        <i class="fa-solid fa-camera"></i>
+
+                        Ambil Foto
+
+                    </button>
+                    <!-- PILIH FOTO DARI PERANGKAT -->
+                    <input type="file" id="cnnImageInput" accept="image/*" capture="environment" style="display:none;">
+
+                    <button class="camera-button" id="uploadCnnButton">
+
+                        <i class="fa-solid fa-image"></i>
+
+                        Pilih Foto
+
+                    </button>
+                </div>
+
+            </section>
+
+
+
+
+
+            <!-- =================================================
+             HASIL POTRET
+             ================================================= -->
+
+            <section class="monitor-panel photo-section">
+
+                <div class="monitor-panel-header">
+
+                    <div>
+
+                        <h2>
+                            Hasil Potret dan Analisis
+                        </h2>
+
+                        <p>
+                            Dokumentasi tanaman yang telah dipotret dan dianalisis
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="photo-result-grid" id="photoResultGrid">
+
+                    <!--
+                    Foto hasil analisis akan ditambahkan
+                    oleh monitoring.js
+                -->
+                    <div id="cnnUploadResult" style="display:none;">
+
+                    </div>
+                    <div class="empty-photo" id="emptyPhoto">
+
+                        <i class="fa-regular fa-images"></i>
+
+                        <p>
+                            Belum ada hasil potret.
+                        </p>
+
+                        <span>
+                            Ambil foto dari kamera untuk menambahkan
+                            dokumentasi tanaman.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+
+
+<section class="monitor-panel" style="margin-top:20px;">
+<div class="monitor-panel-header">
+<div><h2>Hasil Analisis Tanaman</h2><p>Pengukuran lebar daun dan status kesiapan panen dari foto yang dipilih.</p></div>
+</div>
+<div id="cnnAnalysisResult" class="cnn-analysis-result">
+<div class="empty-photo"><i class="fa-solid fa-brain"></i><p>Belum ada foto yang dianalisis.</p><span>Pilih foto tanaman untuk memulai analisis.</span></div>
+</div>
+</section>
+
+</main>
+</div>
+<script src="javascript/cnn.js"></script>
+</body>
+</html>

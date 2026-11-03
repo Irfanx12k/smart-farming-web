@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - Smart Farming</title>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+
+            <div>
+                <h2>Smart Farming</h2>
+                <span>Monitoring System</span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="index.html" class="menu-item active">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="monitoring.html" class="menu-item">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Monitoring</span>
+            </a>
+<a href="history.html" class="menu-item">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>History</span>
+            </a>
+
+
+                <a href="cnn.html" class="menu-item">
+                    <i class="fa-solid fa-camera"></i>
+                    <span>CNN</span>
+                </a>
+
+                <a href="lstm.html" class="menu-item">
+                    <i class="fa-solid fa-brain"></i>
+                    <span>LSTM</span>
+                </a>
+
+            <a href="setting.html" class="menu-item">
+                <i class="fa-solid fa-gear"></i>
+                <span>Pengaturan</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="system-status">
+                <span class="status-dot"></span>
+                <span>Sistem Aktif</span>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+        <!-- HEADER -->
+        <header class="top-header">
+
+            <div>
+                <h1>Dashboard</h1>
+                <p>Pemantauan kondisi tanaman secara langsung</p>
+            </div>
+
+            <div class="header-date">
+                <i class="fa-regular fa-calendar"></i>
+                <span id="currentDate">--</span>
+            </div>
+
+        </header>
+
+
+        <!-- STATUS TANAMAN -->
+        <section class="plant-status-card" id="plantStatusCard">
+
+            <div class="plant-status-left">
+
+                <div class="plant-status-icon">
+                    <i class="fa-solid fa-seedling"></i>
+                </div>
+
+                <div>
+
+                    <span class="section-label">
+                        STATUS TANAMAN
+                    </span>
+
+                    <h2 id="plantStatus">
+                        NORMAL
+                    </h2>
+
+                    <p id="plantStatusDescription">
+                        Kondisi tanaman berada dalam batas
+                        parameter yang ditentukan.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="status-indicator">
+
+                <span
+                    class="status-dot-large"
+                    id="plantStatusDot">
+                </span>
+
+                <span id="plantStatusText">
+                    Kondisi Normal
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- SENSOR -->
+        <section class="dashboard-grid">
+
+
+            <!-- SUHU -->
+            <div class="sensor-card">
+
+                <div class="sensor-card-header">
+
+                    <div class="sensor-icon temperature">
+                        <i class="fa-solid fa-temperature-half"></i>
+                    </div>
+
+                    <span class="sensor-label">
+                        SUHU UDARA
+                    </span>
+
+                </div>
+
+
+                <div class="sensor-value">
+
+                    <span id="temperatureValue">
+                        27.4
+                    </span>
+
+                    <span class="sensor-unit">
+                        °C
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="sensor-status normal"
+                    id="temperatureStatus">
+
+                    <i class="fa-solid fa-circle-check"></i>
+                    Normal
+
+                </div>
+
+            </div>
+
+
+            <!-- KELEMBAPAN UDARA -->
+            <div class="sensor-card">
+
+                <div class="sensor-card-header">
+
+                    <div class="sensor-icon humidity">
+                        <i class="fa-solid fa-cloud"></i>
+                    </div>
+
+                    <span class="sensor-label">
+                        KELEMBAPAN UDARA
+                    </span>
+
+                </div>
+
+
+                <div class="sensor-value">
+
+                    <span id="humidityValue">
+                        --
+                    </span>
+
+                    <span class="sensor-unit">
+                        %
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="sensor-status normal"
+                    id="humidityStatus">
+
+                    <i class="fa-solid fa-circle-check"></i>
+                    Normal
+
+                </div>
+
+            </div>
+
+
+            <!-- KELEMBAPAN TANAH -->
+            <div class="sensor-card">
+
+                <div class="sensor-card-header">
+
+                    <div class="sensor-icon soil">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+
+                    <span class="sensor-label">
+                        KELEMBAPAN TANAH
+                    </span>
+
+                </div>
+
+
+                <div class="sensor-value">
+
+                    <span id="soilValue">
+                        --
+                    </span>
+
+                    <span class="sensor-unit">
+                        %
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="sensor-status normal"
+                    id="soilStatus">
+
+                    <i class="fa-solid fa-circle-check"></i>
+                    Normal
+
+                </div>
+
+            </div>
+
+
+            <!-- POMPA -->
+            <div class="sensor-card">
+
+                <div class="sensor-card-header">
+
+                    <div class="sensor-icon pump">
+                        <i class="fa-solid fa-faucet-drip"></i>
+                    </div>
+
+                    <span class="sensor-label">
+                        STATUS POMPA
+                    </span>
+
+                </div>
+
+
+                <div class="pump-status">
+
+                    <div
+                        class="pump-indicator"
+                        id="pumpIndicator">
+                    </div>
+
+                    <span id="pumpStatus">
+                        --
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="sensor-status normal"
+                    id="pumpMode">
+
+                    <i class="fa-solid fa-rotate"></i>
+                    Mode Otomatis
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- KONDISI SISTEM -->
+        <section class="information-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>Kondisi Sistem</h2>
+
+                    <p>
+                        Ringkasan kondisi lingkungan tanaman saat ini
+                    </p>
+
+                </div>
+
+
+                <div class="last-update">
+
+                    <i class="fa-regular fa-clock"></i>
+
+                    Terakhir diperbarui:
+
+                    <span id="lastUpdate">
+                        --:--:--
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="condition-panel">
+
+
+                <!-- SUHU -->
+                <div class="condition-item">
+
+                    <div class="condition-icon">
+                        <i class="fa-solid fa-temperature-half"></i>
+                    </div>
+
+                    <div class="condition-content">
+
+                        <span>
+                            Suhu Udara
+                        </span>
+
+                        <strong id="temperatureCondition">
+                            Normal
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RH -->
+                <div class="condition-item">
+
+                    <div class="condition-icon">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+
+                    <div class="condition-content">
+
+                        <span>
+                            Kelembapan Udara
+                        </span>
+
+                        <strong id="humidityCondition">
+                            Normal
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SOIL -->
+                <div class="condition-item">
+
+                    <div class="condition-icon">
+                        <i class="fa-solid fa-water"></i>
+                    </div>
+
+                    <div class="condition-content">
+
+                        <span>
+                            Kelembapan Tanah
+                        </span>
+
+                        <strong id="soilCondition">
+                            Normal
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- POMPA -->
+                <div class="condition-item">
+
+                    <div class="condition-icon">
+                        <i class="fa-solid fa-power-off"></i>
+                    </div>
+
+                    <div class="condition-content">
+
+                        <span>
+                            Pompa Air
+                        </span>
+
+                        <strong id="pumpCondition">
+                            Tidak Aktif
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- INFORMASI -->
+        <section class="dashboard-note">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            <div>
+
+                <strong>
+                    Status tanaman ditentukan berdasarkan
+                    pengaturan sistem.
+                </strong>
+
+                <p>
+                    Batas suhu, kelembapan udara, dan
+                    kelembapan tanah dapat diubah melalui
+                    halaman Pengaturan.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+<script src="javascript/dashboard.js"></script>
+
+</body>
+</html>
